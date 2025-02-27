@@ -1,6 +1,19 @@
 // app.js
 import express from "express"
+import express from "mariadb"
 
+
+// Function for connecting to the database
+async function connect() {
+    try {
+        let conn = await createPool.getConnection();
+        console.log('Connected to the database');
+        return conn;
+
+    } catch (err) {
+        console.log(`Error connecting to teh databse: ${err}`);
+    }
+}
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -13,6 +26,8 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 const PORT = 3000;
+
+
 
 app.get('/', (req, res) => {
 
